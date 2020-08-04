@@ -1,0 +1,7 @@
+class Solution:
+    def isPowerOfFour(self, num: int) -> bool:
+        if num<0:
+            return False
+        bin_val = bin(num)
+        return bin_val.count("1") == 1 and bin_val[::-1].find('1')%2 == 0
+
