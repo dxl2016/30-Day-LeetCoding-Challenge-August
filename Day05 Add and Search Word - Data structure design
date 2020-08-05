@@ -1,0 +1,48 @@
+class TrieNode(object):
+    def __init__(self):
+        self.children = {}
+        self.isword = False
+
+class WordDictionary:
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.root = TrieNode()
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds a word into the data structure.
+        """
+        curr_node = self.root
+        for char in word:
+            try:
+                curr_node = curr_node.children[char]
+            except:
+                curr_node.children[char] = TrieNode()
+                curr_node = curr_node.children[char]
+        curr_node.isword = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+        """
+        def dfs(curr_node, s, c):
+            if c == len(s):
+                if curr_node.isword:
+                    self.ans = True
+                return
+                
+            for char in curr_node.children:
+                if s[c] == "." or s[c] == char:
+                    dfs(curr_node.children[char], s, c+1)
+        
+        curr_node = self.root
+        self.ans = False
+        dfs(curr_node, word, 0)
+        return self.ans
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)
