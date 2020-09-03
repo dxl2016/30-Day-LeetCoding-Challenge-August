@@ -1,0 +1,18 @@
+class Solution:
+    def numsSameConsecDiff(self, N: int, K: int) -> List[int]:
+        def dfs(node, s, c):
+            if c == N:
+                if N==1 or N>1 and s[0] != "0":
+                    res.append(int(s))
+                return
+                
+            for i in range(0, 10):
+                if abs(i-node) == K:
+                    dfs(i, s+str(i), c+1)
+        
+        res = []
+        for i in range(0, 10):
+            dfs(i, str(i), 1)
+        
+        return res
+
