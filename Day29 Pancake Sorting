@@ -1,0 +1,11 @@
+class Solution:
+    def pancakeSort(self, A: List[int]) -> List[int]:
+        res = []
+        while(A):
+            if A[-1] != len(A):                
+                m = A.index(len(A))
+                A = (A[:m+1][::-1]+A[m+1:])[::-1]
+                res += [m+1,len(A)]
+            A.pop()
+        return res
+
